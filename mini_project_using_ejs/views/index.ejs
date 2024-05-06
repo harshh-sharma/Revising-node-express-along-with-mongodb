@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../stylesheets/style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-black w-full min-h-screen">
+    <h1 class="text-white text-center font-bold text-3xl my-10">
+      Backend mini project
+    </h1>
+    <div class="flex flex-col gap-5 w-3/12 justify-center item-center mx-auto">
+      <form id="form">
+        <input
+          type="text"
+          name="title"
+          id="title"
+          placeholder="Enter title..."
+          class="px-10 py-1 rounded-sm"
+          
+        />
+        <input
+          type="text"
+          name="description"
+          id="description"
+          placeholder="Enter description..."
+          class="px-10 py-1 rounded-sm"
+        />
+        <button
+          class="bg-green-600 text-white font-semibold text-xl rounded-md text-center py-1 px-3 flex justify-center item-center create"
+        >
+          Create
+        </button>
+      </form>
+      <div id="list"></div>
+    </div>
+    <script>
+        let arr = [];
+        const form = document.getElementById("form");
+        form.addEventListener("submit",async (e) => {
+            e.preventDefault();
+            const title = document.getElementById("title").value
+            const description = document.getElementById("description").value;
+            if(!title || !description){
+                alert("All fields are required")
+            }else{
+                const response = await fetch("http://localhost:3000/",{
+                    method:"POST",
+                    body:JSON.stringify({
+                        title,description
+                    }),
+                    headers:{
+                        "content-type":"application/json"
+                    }
+                });
+                const data = await response.json();
+                console.log(data);
+                arr.push(data);
+                console.log(arr);
+            }
+        })
+        if(arr.length > 0){
+            var li = document.getElementById("list");
+            console.log(li);
+            for( i = 0 ; i < arr.length ; i++){
+                const node = document.createElement("div");
+                node.style.background = "white"
+                const text = document.createTextNode(arr[i]);
+                node.appendChild(text);
+                li.appendChild(node);
+            }
+            console.log("li",li);
+        }
+        console.log("li",li);
+        console.log(form);
+    </script>
+  </body>
+</html>

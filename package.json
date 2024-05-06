@@ -1,0 +1,15 @@
+{
+  "name": "file_system",
+  "version": "1.0.0",
+  "description": "I revise about file system",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "node"
+  ],
+  "author": "Harsh sharma",
+  "license": "ISC"
+}
